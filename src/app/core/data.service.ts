@@ -11,6 +11,16 @@ import { Book } from "app/models/book";
 export class DataService {
   constructor() {}
 
+  private _mostPopularBook: Book = allBooks[0];
+
+  public get mostPopularBook(): Book {
+    return this._mostPopularBook;
+  }
+
+  public set mostPopularBook(v: Book) {
+    this._mostPopularBook = v;
+  }
+
   getReaders(): Reader[] {
     return allReaders;
   }

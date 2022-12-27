@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.allBooks = this.dataService.getBooks();
     this.allReaders = this.dataService.getReaders();
-    this.mostPopularBook = this.allBooks[0];
+    this.mostPopularBook = this.dataService.mostPopularBook;
   }
 
   deleteBook(bookID: number): void {

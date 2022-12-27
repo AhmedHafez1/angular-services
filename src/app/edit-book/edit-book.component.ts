@@ -23,7 +23,7 @@ export class EditBookComponent implements OnInit {
   }
 
   setMostPopular(): void {
-    console.warn("Setting most popular book not yet implemented.");
+    this.dataService.mostPopularBook = this.selectedBook;
   }
 
   saveChanges(): void {

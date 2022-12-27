@@ -258,7 +258,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let DataService = class DataService {
-    constructor() { }
+    constructor() {
+        this._mostPopularBook = app_data__WEBPACK_IMPORTED_MODULE_0__.allBooks[0];
+    }
+    get mostPopularBook() {
+        return this._mostPopularBook;
+    }
+    set mostPopularBook(v) {
+        this._mostPopularBook = v;
+    }
     getReaders() {
         return app_data__WEBPACK_IMPORTED_MODULE_0__.allReaders;
     }
@@ -309,7 +317,7 @@ let DashboardComponent = class DashboardComponent {
     ngOnInit() {
         this.allBooks = this.dataService.getBooks();
         this.allReaders = this.dataService.getReaders();
-        this.mostPopularBook = this.allBooks[0];
+        this.mostPopularBook = this.dataService.mostPopularBook;
     }
     deleteBook(bookID) {
         console.warn(`Delete book not yet implemented (bookID: ${bookID}).`);
@@ -392,7 +400,7 @@ let EditBookComponent = class EditBookComponent {
         this.selectedBook = this.dataService.getBookById(bookID);
     }
     setMostPopular() {
-        console.warn("Setting most popular book not yet implemented.");
+        this.dataService.mostPopularBook = this.selectedBook;
     }
     saveChanges() {
         console.warn("Save changes to book not yet implemented.");
