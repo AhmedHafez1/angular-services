@@ -195,17 +195,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 3679);
-/* harmony import */ var _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-book/add-book.component */ 9884);
-/* harmony import */ var _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-reader/add-reader.component */ 4808);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ 5041);
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ 158);
-/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard/dashboard.component */ 7528);
-/* harmony import */ var _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit-reader/edit-reader.component */ 6236);
-/* harmony import */ var _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-book/edit-book.component */ 445);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _core_data_service_factory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/data.service.factory */ 8101);
+/* harmony import */ var app_core_data_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! app/core/data.service */ 3943);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-book/add-book.component */ 9884);
+/* harmony import */ var _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add-reader/add-reader.component */ 4808);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ 5041);
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ 158);
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard/dashboard.component */ 7528);
+/* harmony import */ var _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./edit-reader/edit-reader.component */ 6236);
+/* harmony import */ var _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./edit-book/edit-book.component */ 445);
+
+
+
 
 
 
@@ -219,22 +225,49 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.NgModule)({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent,
-            _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__.DashboardComponent,
-            _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_0__.AddBookComponent,
-            _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_5__.EditReaderComponent,
-            _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_6__.EditBookComponent,
-            _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_1__.AddReaderComponent,
+            _app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent,
+            _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__.DashboardComponent,
+            _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_2__.AddBookComponent,
+            _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_7__.EditReaderComponent,
+            _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_8__.EditBookComponent,
+            _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_3__.AddReaderComponent,
         ],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_3__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule],
-        providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_5__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HttpClientModule],
+        providers: [
+            {
+                provide: app_core_data_service__WEBPACK_IMPORTED_MODULE_1__.DataService,
+                useFactory: _core_data_service_factory__WEBPACK_IMPORTED_MODULE_0__.dataServiceFactory,
+                deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_13__.HttpClient],
+            },
+        ],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent],
     })
 ], AppModule);
 
+
+
+/***/ }),
+
+/***/ 8101:
+/*!**********************************************!*\
+  !*** ./src/app/core/data.service.factory.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dataServiceFactory": () => (/* binding */ dataServiceFactory)
+/* harmony export */ });
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data.service */ 3943);
+
+const dataServiceFactory = (http) => {
+    const dataService = new _data_service__WEBPACK_IMPORTED_MODULE_0__.DataService(http);
+    return dataService;
+};
 
 
 /***/ }),
@@ -250,15 +283,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DataService": () => (/* binding */ DataService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var app_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../data */ 8387);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 1841);
+
 
 
 
 
 let DataService = class DataService {
-    constructor() {
+    constructor(http) {
+        this.http = http;
         this._mostPopularBook = app_data__WEBPACK_IMPORTED_MODULE_0__.allBooks[0];
     }
     get mostPopularBook() {
@@ -268,7 +304,7 @@ let DataService = class DataService {
         this._mostPopularBook = v;
     }
     getReaders() {
-        return app_data__WEBPACK_IMPORTED_MODULE_0__.allReaders;
+        return this.http.get("/api/readers");
     }
     getReaderById(id) {
         return app_data__WEBPACK_IMPORTED_MODULE_0__.allReaders.find((reader) => reader.readerID === id);
@@ -280,11 +316,11 @@ let DataService = class DataService {
         return app_data__WEBPACK_IMPORTED_MODULE_0__.allBooks.find((book) => book.bookID === id);
     }
 };
-DataService.ctorParameters = () => [];
-DataService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: "root",
-    })
+DataService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient }
+];
+DataService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)()
 ], DataService);
 
 
@@ -316,7 +352,7 @@ let DashboardComponent = class DashboardComponent {
     }
     ngOnInit() {
         this.allBooks = this.dataService.getBooks();
-        this.allReaders = this.dataService.getReaders();
+        this.dataService.getReaders().subscribe((data) => (this.allReaders = data), (error) => console.log(error));
         this.mostPopularBook = this.dataService.mostPopularBook;
     }
     deleteBook(bookID) {
@@ -587,7 +623,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">All Books</h3>\n        </div>\n        <div class=\"panel-body\">\n        <li *ngFor='let book of allBooks'>\n          <i>{{book.title}}</i>\n          <a [routerLink]=\"['/editbook', book.bookID]\"> Edit </a>\n          <a (click)=\"deleteBook(book.bookID)\">Delete</a>\n        </li>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">All Readers</h3>\n        </div>\n        <div class=\"panel-body\">\n        <li *ngFor='let reader of allReaders'>\n          {{reader.name}}\n          <a [routerLink]=\"['/editreader', reader.readerID]\">Edit</a>\n          <a (click)=\"deleteReader(reader.readerID)\"> Delete </a>\n        </li>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Most Popular Book</h3>\n        </div>\n        <div class=\"panel-body\">\n          <i>{{mostPopularBook.title}}</i> by {{mostPopularBook.author}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">All Books</h3>\n        </div>\n        <div class=\"panel-body\">\n          <li *ngFor=\"let book of allBooks\">\n            <i>{{ book.title }}</i>\n            <a [routerLink]=\"['/editbook', book.bookID]\"> Edit </a>\n            <a (click)=\"deleteBook(book.bookID)\">Delete</a>\n          </li>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">All Readers</h3>\n        </div>\n        <div class=\"panel-body\">\n          <li *ngFor=\"let reader of allReaders\">\n            {{ reader.name }}\n            <a [routerLink]=\"['/editreader', reader.readerID]\">Edit</a>\n            <a (click)=\"deleteReader(reader.readerID)\"> Delete </a>\n          </li>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-4\">\n      <div class=\"panel panel-primary\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Most Popular Book</h3>\n        </div>\n        <div class=\"panel-body\">\n          <i>{{ mostPopularBook?.title }}</i> by {{ mostPopularBook?.author }}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 

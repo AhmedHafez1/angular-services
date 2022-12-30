@@ -4,12 +4,12 @@ import { allReaders } from "./../data";
 import { Reader } from "app/models/reader";
 import { Injectable } from "@angular/core";
 import { Book } from "app/models/book";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class DataService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   private _mostPopularBook: Book = allBooks[0];
 
@@ -21,8 +21,8 @@ export class DataService {
     this._mostPopularBook = v;
   }
 
-  getReaders(): Reader[] {
-    return allReaders;
+  getReaders(): Observable<Reader[]> {
+    return this.http.get<Reader[]>("/api/readers");
   }
 
   getReaderById(id: number): Reader {
