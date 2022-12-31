@@ -26,6 +26,19 @@ export class DashboardComponent implements OnInit {
     this.bookService.getAll().subscribe((data) => (this.allBooks = data));
     this.readerService.getAll().subscribe((data) => (this.allReaders = data));
     this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
+
+    this.getAuthorRecommendationAsync(-3);
+
+    console.log("ngOnInit executed");
+  }
+
+  private async getAuthorRecommendationAsync(id: number): Promise<void> {
+    try {
+      const author = await this.readerService.logRecommendedAuthor(id);
+      console.log("Success: " + author);
+    } catch (e) {
+      console.error("Fail: " + e);
+    }
   }
 
   deleteBook(bookID: number): void {

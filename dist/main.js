@@ -386,6 +386,16 @@ let ReaderService = class ReaderService extends app_core_data_service__WEBPACK_I
         super(...arguments);
         this.apiUrl = "/api/readers/";
     }
+    logRecommendedAuthor(id) {
+        return new Promise((res, rej) => {
+            setTimeout(() => {
+                if (id > 0)
+                    res("Mr. Ahmed");
+                else
+                    rej(new Error("Not valid id"));
+            }, 3000);
+        });
+    }
 };
 ReaderService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
@@ -430,6 +440,19 @@ let DashboardComponent = class DashboardComponent {
         this.bookService.getAll().subscribe((data) => (this.allBooks = data));
         this.readerService.getAll().subscribe((data) => (this.allReaders = data));
         this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
+        this.getAuthorRecommendationAsync(-3);
+        console.log("ngOnInit executed");
+    }
+    getAuthorRecommendationAsync(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            try {
+                const author = yield this.readerService.logRecommendedAuthor(id);
+                console.log("Success: " + author);
+            }
+            catch (e) {
+                console.error("Fail: " + e);
+            }
+        });
     }
     deleteBook(bookID) {
         console.warn(`Delete book not yet implemented (bookID: ${bookID}).`);
