@@ -1,4 +1,4 @@
-import { dataServiceFactory } from "./core/data.service.factory";
+import { bookServiceFactory } from "./core/data.service.factory";
 import { DataService } from "app/core/data.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -22,13 +22,6 @@ import { EditBookComponent } from "./edit-book/edit-book.component";
     AddReaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [
-    {
-      provide: DataService,
-      useFactory: dataServiceFactory,
-      deps: [HttpClient],
-    },
-  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

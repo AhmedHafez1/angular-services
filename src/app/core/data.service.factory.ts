@@ -1,7 +1,7 @@
+import { BookService } from "./book.service";
 import { HttpClient } from "@angular/common/http";
-import { DataService } from "./data.service";
 
-export const dataServiceFactory = (http: HttpClient) => {
-  const dataService = new DataService(http);
+export const bookServiceFactory = (http: HttpClient) => {
+  const dataService = new BookService(http);
   return dataService;
 };

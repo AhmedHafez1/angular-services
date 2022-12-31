@@ -1,8 +1,10 @@
+import { MostPopularBookService } from "./../core/most-popular-book.service";
+import { ReaderService } from "./../core/reader.service";
+import { BookService } from "./../core/book.service";
 import { Component, OnInit } from "@angular/core";
 
 import { Book } from "app/models/book";
 import { Reader } from "app/models/reader";
-import { DataService } from "app/core/data.service";
 
 @Component({
   selector: "app-dashboard",
@@ -14,15 +16,22 @@ export class DashboardComponent implements OnInit {
   allReaders: Reader[];
   mostPopularBook: Book;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private bookService: BookService,
+    private readerService: ReaderService,
+    private mostPopularBookService: MostPopularBookService
+  ) {}
 
   ngOnInit() {
-    this.allBooks = this.dataService.getBooks();
-    this.dataService.getReaders().subscribe(
+    this.bookService.getAll().subscribe(
+      (data) => (this.allBooks = data),
+      (error) => console.log(error)
+    );
+    this.readerService.getAll().subscribe(
       (data) => (this.allReaders = data),
       (error) => console.log(error)
     );
-    this.mostPopularBook = this.dataService.mostPopularBook;
+    this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
   }
 
   deleteBook(bookID: number): void {

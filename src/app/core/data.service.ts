@@ -1,39 +1,18 @@
-import { allBooks } from "app/data";
-import { allReaders } from "./../data";
-
-import { Reader } from "app/models/reader";
-import { Injectable } from "@angular/core";
-import { Book } from "app/models/book";
+import { Inject, Injectable, InjectionToken } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class DataService {
+export abstract class DataService<T> {
+  protected abstract apiUrl: string;
+
   constructor(private http: HttpClient) {}
 
-  private _mostPopularBook: Book = allBooks[0];
-
-  public get mostPopularBook(): Book {
-    return this._mostPopularBook;
+  getAll(): Observable<T[]> {
+    return this.http.get<T[]>(this.apiUrl);
   }
 
-  public set mostPopularBook(v: Book) {
-    this._mostPopularBook = v;
-  }
-
-  getReaders(): Observable<Reader[]> {
-    return this.http.get<Reader[]>("/api/readers");
-  }
-
-  getReaderById(id: number): Reader {
-    return allReaders.find((reader) => reader.readerID === id);
-  }
-
-  getBooks(): Book[] {
-    return allBooks;
-  }
-
-  getBookById(id: number): Book {
-    return allBooks.find((book) => book.bookID === id);
+  getById(id: number): Observable<T> {
+    return this.http.get<T>(this.apiUrl + id);
   }
 }

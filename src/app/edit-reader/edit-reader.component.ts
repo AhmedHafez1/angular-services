@@ -1,4 +1,4 @@
-import { DataService } from "./../core/data.service";
+import { ReaderService } from "./../core/reader.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
@@ -10,16 +10,18 @@ import { Reader } from "app/models/reader";
   styles: [],
 })
 export class EditReaderComponent implements OnInit {
-  selectedReader: Reader;
+  selectedReader: Reader = new Reader();
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService
+    private readerService: ReaderService
   ) {}
 
   ngOnInit() {
     let readerID: number = parseInt(this.route.snapshot.params["id"]);
-    this.selectedReader = this.dataService.getReaderById(readerID);
+    this.readerService
+      .getById(readerID)
+      .subscribe((data) => (this.selectedReader = data));
   }
 
   saveChanges() {

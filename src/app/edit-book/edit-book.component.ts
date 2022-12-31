@@ -1,3 +1,5 @@
+import { MostPopularBookService } from "./../core/most-popular-book.service";
+import { BookService } from "./../core/book.service";
 import { DataService } from "./../core/data.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
@@ -10,20 +12,23 @@ import { Book } from "app/models/book";
   styles: [],
 })
 export class EditBookComponent implements OnInit {
-  selectedBook: Book;
+  selectedBook: Book = new Book();
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService
+    private bookService: BookService,
+    private mostPopularBookService: MostPopularBookService
   ) {}
 
   ngOnInit() {
     let bookID: number = parseInt(this.route.snapshot.params["id"]);
-    this.selectedBook = this.dataService.getBookById(bookID);
+    this.bookService
+      .getById(bookID)
+      .subscribe((data) => (this.selectedBook = data));
   }
 
   setMostPopular(): void {
-    this.dataService.mostPopularBook = this.selectedBook;
+    this.mostPopularBookService.mostPopularBook = this.selectedBook;
   }
 
   saveChanges(): void {
