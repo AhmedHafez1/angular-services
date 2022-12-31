@@ -284,9 +284,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DataService": () => (/* binding */ DataService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 9193);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 5304);
+
+
 
 
 
@@ -295,17 +299,26 @@ let DataService = class DataService {
         this.http = http;
     }
     getAll() {
-        return this.http.get(this.apiUrl);
+        return this.http.get(this.apiUrl).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
     getById(id) {
         return this.http.get(this.apiUrl + id);
     }
+    handleError(error) {
+        const trackerError = {
+            errorNumber: error.status,
+            message: error.statusText,
+            userMessage: "An error occured while retrieving the data",
+        };
+        console.log(trackerError);
+        return rxjs__WEBPACK_IMPORTED_MODULE_1__.EMPTY;
+    }
 };
 DataService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
 ];
-DataService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()
+DataService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)()
 ], DataService);
 
 
@@ -414,8 +427,8 @@ let DashboardComponent = class DashboardComponent {
         this.mostPopularBookService = mostPopularBookService;
     }
     ngOnInit() {
-        this.bookService.getAll().subscribe((data) => (this.allBooks = data), (error) => console.log(error));
-        this.readerService.getAll().subscribe((data) => (this.allReaders = data), (error) => console.log(error));
+        this.bookService.getAll().subscribe((data) => (this.allBooks = data));
+        this.readerService.getAll().subscribe((data) => (this.allReaders = data));
         this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
     }
     deleteBook(bookID) {
@@ -487,7 +500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_book_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../core/book.service */ 1975);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var app_models_book__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/models/book */ 536);
+/* harmony import */ var app_models_book__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/models/book */ 1536);
 
 
 
@@ -547,7 +560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_reader_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../core/reader.service */ 8395);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var app_models_reader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/models/reader */ 508);
+/* harmony import */ var app_models_reader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/models/reader */ 7508);
 
 
 
@@ -585,7 +598,7 @@ EditReaderComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 536:
+/***/ 1536:
 /*!********************************!*\
   !*** ./src/app/models/book.ts ***!
   \********************************/
@@ -602,7 +615,7 @@ class Book {
 
 /***/ }),
 
-/***/ 508:
+/***/ 7508:
 /*!**********************************!*\
   !*** ./src/app/models/reader.ts ***!
   \**********************************/
