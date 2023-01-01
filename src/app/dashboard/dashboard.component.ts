@@ -1,7 +1,8 @@
 import { MostPopularBookService } from "./../core/most-popular-book.service";
 import { ReaderService } from "./../core/reader.service";
 import { BookService } from "./../core/book.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, VERSION } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 
 import { Book } from "app/models/book";
 import { Reader } from "app/models/reader";
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private readerService: ReaderService,
-    private mostPopularBookService: MostPopularBookService
+    private mostPopularBookService: MostPopularBookService,
+    private title: Title
   ) {}
 
   ngOnInit() {
@@ -27,7 +29,9 @@ export class DashboardComponent implements OnInit {
     this.readerService.getAll().subscribe((data) => (this.allReaders = data));
     this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
 
-    this.getAuthorRecommendationAsync(-3);
+    this.getAuthorRecommendationAsync(7);
+
+    this.title.setTitle(`Book Tracker v${VERSION.full}`);
 
     console.log("ngOnInit executed");
   }

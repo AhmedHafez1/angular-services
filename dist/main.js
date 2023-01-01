@@ -195,11 +195,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 3679);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ 1841);
 /* harmony import */ var _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-book/add-book.component */ 9884);
 /* harmony import */ var _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-reader/add-reader.component */ 4808);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ 5041);
@@ -207,6 +207,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard/dashboard.component */ 7528);
 /* harmony import */ var _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit-reader/edit-reader.component */ 6236);
 /* harmony import */ var _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-book/edit-book.component */ 445);
+/* harmony import */ var _core_centralized_error_handler_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./core/centralized-error-handler.service */ 669);
+
 
 
 
@@ -221,8 +223,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent,
             _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__.DashboardComponent,
@@ -231,8 +233,11 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
             _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_6__.EditBookComponent,
             _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_1__.AddReaderComponent,
         ],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_3__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_3__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClientModule],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent],
+        providers: [
+            { provide: _angular_core__WEBPACK_IMPORTED_MODULE_9__.ErrorHandler, useClass: _core_centralized_error_handler_service__WEBPACK_IMPORTED_MODULE_7__.CentralizedErrorHandlerService },
+        ],
     })
 ], AppModule);
 
@@ -268,6 +273,39 @@ BookService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
         providedIn: "root",
     })
 ], BookService);
+
+
+
+/***/ }),
+
+/***/ 669:
+/*!***********************************************************!*\
+  !*** ./src/app/core/centralized-error-handler.service.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CentralizedErrorHandlerService": () => (/* binding */ CentralizedErrorHandlerService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7716);
+
+
+let CentralizedErrorHandlerService = class CentralizedErrorHandlerService {
+    handleError(error) {
+        const errorObj = {
+            message: error.message,
+            errorNumber: 300,
+            userMessage: "An error occured, Please try again.",
+        };
+        console.log(errorObj);
+    }
+};
+CentralizedErrorHandlerService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.Injectable)()
+], CentralizedErrorHandlerService);
 
 
 
@@ -418,12 +456,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DashboardComponent": () => (/* binding */ DashboardComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./dashboard.component.html */ 9306);
 /* harmony import */ var _core_most_popular_book_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../core/most-popular-book.service */ 286);
 /* harmony import */ var _core_reader_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../core/reader.service */ 8395);
 /* harmony import */ var _core_book_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../core/book.service */ 1975);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+
 
 
 
@@ -431,20 +471,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let DashboardComponent = class DashboardComponent {
-    constructor(bookService, readerService, mostPopularBookService) {
+    constructor(bookService, readerService, mostPopularBookService, title) {
         this.bookService = bookService;
         this.readerService = readerService;
         this.mostPopularBookService = mostPopularBookService;
+        this.title = title;
     }
     ngOnInit() {
         this.bookService.getAll().subscribe((data) => (this.allBooks = data));
         this.readerService.getAll().subscribe((data) => (this.allReaders = data));
         this.mostPopularBook = this.mostPopularBookService.mostPopularBook;
-        this.getAuthorRecommendationAsync(-3);
+        this.getAuthorRecommendationAsync(7);
+        this.title.setTitle(`Book Tracker v${_angular_core__WEBPACK_IMPORTED_MODULE_4__.VERSION.full}`);
         console.log("ngOnInit executed");
     }
     getAuthorRecommendationAsync(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const author = yield this.readerService.logRecommendedAuthor(id);
                 console.log("Success: " + author);
@@ -464,10 +506,11 @@ let DashboardComponent = class DashboardComponent {
 DashboardComponent.ctorParameters = () => [
     { type: _core_book_service__WEBPACK_IMPORTED_MODULE_3__.BookService },
     { type: _core_reader_service__WEBPACK_IMPORTED_MODULE_2__.ReaderService },
-    { type: _core_most_popular_book_service__WEBPACK_IMPORTED_MODULE_1__.MostPopularBookService }
+    { type: _core_most_popular_book_service__WEBPACK_IMPORTED_MODULE_1__.MostPopularBookService },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.Title }
 ];
-DashboardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+DashboardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: "app-dashboard",
         template: _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
     })
